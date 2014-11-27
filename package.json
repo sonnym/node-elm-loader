@@ -1,0 +1,27 @@
+{ "name": "elm"
+, "description": "An easy way to load Elm files in Node."
+, "version": "0.1.0"
+, "author": "Sonny Michaud <michaud.sonny@gmail.com> (https://github.com/sonnym)"
+
+, "main" : "src/index.js"
+
+, "scripts": {
+    "test": "./node_module/.bin/nodeunit test/index.js"
+  }
+
+, "dependencies": {
+    "inflect-js": "*"
+  }
+
+, "devDependencies": {
+    "nodeunit": "*"
+  }
+
+, "repository": {
+    "type": "git"
+  , "url": "https://github.com/sonnym/node-elm.git"
+  }
+
+, "engines": { "node": ">=0.11" }
+}
+
