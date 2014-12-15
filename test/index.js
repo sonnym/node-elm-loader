@@ -21,6 +21,15 @@ exports.basicFunctionality = {
   }
 };
 
+exports.testBuildsNewObject = function(test) {
+  test.notEqual(
+    Elm(path.resolve(__dirname, "fixtures/empty_module.elm")),
+    Elm(path.resolve(__dirname, "fixtures/empty_module.elm"))
+  );
+
+  test.done();
+};
+
 exports.fsManagement = {
   testDoesNotOverwriteExistingFile: function(test) {
     test.throws(function() {
