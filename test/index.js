@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 var EventEmitter = require("events").EventEmitter;
 
-var Elm = require("./../src/elm_runner");
+var Elm = require("./../");
 
 exports.basicFunctionality = {
   setUp: function(callback) {
