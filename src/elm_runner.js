@@ -11,8 +11,9 @@ var Inflect = require("inflect-js");
 /*
  * constructor function
  */
-function ElmRunner(filename) {
+function ElmRunner(filename, defaults) {
   this.filename = filename;
+  this.defaults = defaults || {};
 
   this.baseName = path.basename(filename, path.extname(filename));
   this.moduleName = Inflect.classify(this.baseName);
@@ -30,8 +31,8 @@ function ElmRunner(filename) {
 /**
  * expose a function that wraps new instances
  */
-module.exports = function(filename) {
-  return new ElmRunner(filename);
+module.exports = function(filename, defaults) {
+  return new ElmRunner(filename, defaults);
 };
 
 function withCheckedPath(outputPath, callback) {
@@ -59,7 +60,7 @@ function execute() {
 
   vm.runInContext(compiledOutput, context, this.outputPath);
 
-  this.compiledModule = context.Elm.fullscreen(context.Elm[this.moduleName]);
+  this.compiledModule = context.Elm.fullscreen(context.Elm[this.moduleName], this.defaults);
 }
 
 /**
@@ -67,18 +68,32 @@ function execute() {
  */
 function wrap() {
   var ports = this.compiledModule.ports;
-  var emitter = new EventEmitter();
+
+  var incomingEmitter = new EventEmitter();
+  var outgoingEmitter = new EventEmitter();
+
+  var emit = incomingEmitter.emit.bind(incomingEmitter);
 
   Object.keys(ports).forEach(function(key) {
-    ports[key].subscribe(function() {
-      var args = Array.prototype.slice.call(arguments);
-      args.unshift(key);
+    outgoingEmitter.addListener(key, function() {
+      var args = Array.prototype.slice.call(arguments)
 
-      emitter.emit.apply(emitter, args);
+      ports[key].send.apply(ports[key], args);
     });
+
+    if (ports[key].subscribe) {
+      ports[key].subscribe(function() {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift(key);
+
+        emit.apply(incomingEmitter, args);
+      });
+    }
   });
 
-  this.emitter = emitter;
+  incomingEmitter.emit = outgoingEmitter.emit.bind(outgoingEmitter);;
+
+  this.emitter = incomingEmitter;
 }
 
 function getDefaultContext() {

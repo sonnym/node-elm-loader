@@ -57,3 +57,17 @@ exports.testConstantPort = function(test) {
     test.done();
   });
 };
+
+exports.testEchoPort = function(test) {
+  var echoPort = Elm(path.resolve(__dirname, "fixtures/echo_port.elm"), {
+    messageIn: ""
+  });
+  var message = "test from node";
+
+  echoPort.emitter.on("messageOut", function(echo) {
+    test.equal(echo, '"' + message + '"');
+    test.done();
+  });
+
+  echoPort.emitter.emit("messageIn", message);
+};
