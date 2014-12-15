@@ -1,4 +1,4 @@
-{ "name": "elm"
+{ "name": "elm-loader"
 , "description": "An easy way to load Elm files in Node."
 , "version": "0.14.0"
 , "author": "Sonny Michaud <michaud.sonny@gmail.com> (https://github.com/sonnym)"
