@@ -11,7 +11,8 @@
 
 , "dependencies": {
     "exec-sync": "*",
-    "inflect-js": "*"
+    "inflect-js": "*",
+    "jsdom": "*"
   }
 
 , "devDependencies": {
