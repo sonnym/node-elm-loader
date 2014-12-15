@@ -48,3 +48,12 @@ exports.fsManagement = {
     });
   }
 };
+
+exports.testConstantPort = function(test) {
+  var constantPort = Elm(path.resolve(__dirname, "fixtures/constant_port.elm"));
+
+  constantPort.emitter.on("messageOut", function(message) {
+    test.equal(message, "test from elm");
+    test.done();
+  });
+};

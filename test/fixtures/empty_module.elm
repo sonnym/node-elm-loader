@@ -1,4 +1,6 @@
 module EmptyModule where
 
-empty : String
-empty = "empty"
+import Text
+import Graphics.Element (Element)
+main : Element
+main = Text.asText "main"
