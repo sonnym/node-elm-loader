@@ -18,9 +18,12 @@ function ElmRunner(filename) {
 
   this.outputPath = path.join(path.dirname(filename), this.baseName + ".js");
 
-  this.compile();
-  this.execute();
-  this.wrap();
+  var self = this;
+  withCheckedPath(this.outputPath, function() {
+    self.compile();
+    self.execute();
+    self.wrap();
+  });
 }
 
 /**
@@ -57,3 +60,12 @@ ElmRunner.prototype.wrap = function(compiledModule) {
 module.exports = function(filename) {
   return new ElmRunner(filename);
 };
+
+function withCheckedPath(outputPath, callback) {
+  if (fs.existsSync(outputPath)) {
+    throw "Elm: File with name (" + outputPath + ") would be overwritten";
+  } else {
+    callback();
+    fs.unlinkSync(outputPath);
+  }
+}
