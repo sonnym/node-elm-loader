@@ -1,9 +1,21 @@
-var Elm = require("./../src/register");
+var path = require("path");
+var EventEmitter = require("events").EventEmitter;
 
-exports.testFileLoad = function(test) {
-  var constant = require("./fixtures/constant_port.elm");
+var Elm = require("./../src/elm_runner");
 
-  test.assert(constant instanceof EventEmitter);
+exports.basicFunctionality = {
+  setUp: function(callback) {
+    this.module = Elm(path.resolve(__dirname, "fixtures/empty_module.elm"));
+    callback();
+  },
 
-  test.done();
+  testConstructorFunction: function(test) {
+    test.equal(this.module.constructor.name, "ElmRunner");
+    test.done();
+  },
+
+  testModuleNameResolution: function(test) {
+    test.equal(this.module.moduleName, "EmptyModule");
+    test.done();
+  }
 };
