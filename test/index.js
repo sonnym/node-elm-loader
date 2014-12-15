@@ -65,7 +65,7 @@ exports.testEchoPort = function(test) {
   var message = "test from node";
 
   echoPort.emitter.on("messageOut", function(echo) {
-    test.equal(echo, '"' + message + '"');
+    test.equal(echo, '"' + message + '"'); // the message comes back from elm with extra quotation marks
     test.done();
   });
 
