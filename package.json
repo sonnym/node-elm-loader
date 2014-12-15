@@ -24,6 +24,6 @@
   , "url": "https://github.com/sonnym/node-elm.git"
   }
 
-, "engines": { "node": ">=0.11" }
+, "engines": { "node": ">=0.10" }
 }
 
