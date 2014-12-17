@@ -83,3 +83,8 @@ var echoPort = Elm(path.resolve(__dirname, "fixtures/echo_port.elm"), {
   messageIn: ""
 });
 ```
+
+Example
+-------
+
+To try it out, clone this repository, run `npm link` and then run `node example/test.js`!
