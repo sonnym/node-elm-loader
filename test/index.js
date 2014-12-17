@@ -23,7 +23,13 @@ exports.basicFunctionality = {
   testModuleNameResolution: function(test) {
     test.equal(this.module.moduleName, "EmptyModule");
     test.done();
-  }
+  },
+};
+
+exports.testConventionalElmModelNames = function(test) {
+  var module = Elm(path.resolve(__dirname, "fixtures/EmptyModule.elm"));
+  test.equal(module.moduleName, "EmptyModule");
+  test.done();
 };
 
 exports.testBuildsNewObject = function(test) {

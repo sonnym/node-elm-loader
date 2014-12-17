@@ -16,7 +16,12 @@ function ElmRunner(filename, defaults) {
   this.defaults = defaults || {};
 
   this.baseName = path.basename(filename, path.extname(filename));
-  this.moduleName = Inflect.classify(this.baseName);
+
+  if (this.baseName.match(/^[A-Z]/)) {
+    this.moduleName = this.baseName;
+  } else {
+    this.moduleName = Inflect.classify(this.baseName);
+  }
 
   this.outputPath = path.join(path.dirname(filename), this.baseName + ".js");
 
