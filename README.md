@@ -63,6 +63,10 @@ $ node test.js
 ^C
 ```
 
+You can also access the `ports` property, rather than the `emitter` on the object
+returned by the top level factory function and subscribe as you would with a
+[typical setup](http://elm-lang.org/learn/Ports.elm).
+
 Caveats
 -------
 

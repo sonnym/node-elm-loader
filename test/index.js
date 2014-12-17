@@ -24,6 +24,11 @@ exports.basicFunctionality = {
     test.equal(this.module.moduleName, "EmptyModule");
     test.done();
   },
+
+  testExposureOfPortsObjectOnWrapper: function(test) {
+    test.equal(this.module.compiledModule.ports, this.module.ports);
+    test.done();
+  }
 };
 
 exports.testConventionalElmModelNames = function(test) {

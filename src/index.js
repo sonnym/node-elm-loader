@@ -99,6 +99,7 @@ function wrap() {
   incomingEmitter.emit = outgoingEmitter.emit.bind(outgoingEmitter);;
 
   this.emitter = incomingEmitter;
+  this.ports = this.compiledModule.ports;
 }
 
 function getDefaultContext() {
