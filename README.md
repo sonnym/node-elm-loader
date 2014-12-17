@@ -70,7 +70,7 @@ Make sure your files are named in a conventional manner with underscores - they 
 be inflected to infer the module they contain, e.g. `ticking_port.elm` will correspond to the
 `TickingPort` module above.
 
-If you are defining ports *into* Elm, you also need to supply a second argument to the constructor
+If you are defining ports *into* Elm, you also need to supply a second argument to the factory
 function to define the defaults for those functions, e.g.
 
 ```Javascript

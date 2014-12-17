@@ -34,7 +34,7 @@ function ElmRunner(filename, defaults) {
 }
 
 /**
- * expose a function that wraps new instances
+ * expose a factory function that wraps new instances
  */
 module.exports = function(filename, defaults) {
   return new ElmRunner(filename, defaults);
