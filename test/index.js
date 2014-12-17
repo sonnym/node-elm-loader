@@ -4,6 +4,11 @@ var EventEmitter = require("events").EventEmitter;
 
 var Elm = require("./../");
 
+process.on("uncaughtException", function(err) {
+  console.error("\nERROR RUNNING TESTS:\n  " + require("util").inspect(err));
+  process.exit(1);
+});
+
 exports.basicFunctionality = {
   setUp: function(callback) {
     this.module = Elm(path.resolve(__dirname, "fixtures/empty_module.elm"));
