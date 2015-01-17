@@ -44,7 +44,7 @@ Next, wire import your module into Node!
 var path = require("path");
 var Elm = require("elm-loader");
 
-var compiledCode = Elm(path.resolve(__dirname, "ticking_port.elm"));
+var compiledCode = Elm(path.resolve(__dirname, "ticking_port.elm"), __dirname);
 
 compiledCode.emitter.on("messageOut", function(message) {
   console.log(message)
@@ -79,7 +79,7 @@ If you are defining ports *into* Elm, you also need to supply a second argument 
 function to define the defaults for those functions, e.g.
 
 ```Javascript
-var echoPort = Elm(path.resolve(__dirname, "fixtures/echo_port.elm"), {
+var echoPort = Elm(path.resolve(__dirname, "fixtures/echo_port.elm"), "fixtures", {
   messageIn: ""
 });
 ```

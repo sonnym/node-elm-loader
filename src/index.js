@@ -11,19 +11,15 @@ var Inflect = require("inflect-js");
 /*
  * constructor function
  */
-function ElmRunner(filename, defaults) {
+function ElmRunner(filename, baseDir, defaults) {
+  var relativePath = path.relative(baseDir, filename);
+  var baseName = path.basename(filename, path.extname(filename));
+
   this.filename = filename;
   this.defaults = defaults || {};
 
-  this.baseName = path.basename(filename, path.extname(filename));
-
-  if (this.baseName.match(/^[A-Z]/)) {
-    this.moduleName = this.baseName;
-  } else {
-    this.moduleName = Inflect.classify(this.baseName);
-  }
-
-  this.outputPath = path.join(path.dirname(filename), this.baseName + ".js");
+  this.moduleName = resolveModuleName(relativePath);
+  this.outputPath = path.join(path.dirname(filename), baseName + ".js");
 
   var self = this;
   withCheckedPath(this.outputPath, function() {
@@ -36,8 +32,8 @@ function ElmRunner(filename, defaults) {
 /**
  * expose a factory function that wraps new instances
  */
-module.exports = function(filename, defaults) {
-  return new ElmRunner(filename, defaults);
+module.exports = function(filename, baseDir, defaults) {
+  return new ElmRunner(filename, baseDir, defaults);
 };
 
 function withCheckedPath(outputPath, callback) {
@@ -65,7 +61,9 @@ function execute() {
 
   vm.runInContext(compiledOutput, context, this.outputPath);
 
-  this.compiledModule = context.Elm.fullscreen(context.Elm[this.moduleName], this.defaults);
+  var module = extractModule(this.moduleName, context);
+
+  this.compiledModule = context.Elm.fullscreen(module, this.defaults);
 }
 
 /**
@@ -115,4 +113,33 @@ function getDefaultContext() {
     setTimeout: setTimeout,
     clearTimeout: clearTimeout
   });
+}
+
+function resolveModuleName(relativePath) {
+  var extIndex = relativePath.length - path.extname(relativePath).length;
+  var pathWithoutExt = relativePath.substr(0, extIndex);
+
+  if (relativePath.indexOf(path.sep) > -1) {
+    var pathParts = pathWithoutExt.split(path.sep);
+  } else {
+    var pathParts = [pathWithoutExt];
+  }
+
+  return pathParts.map(function(part) {
+    if (part.match(/^[A-Z]/)) {
+      return part;
+    } else {
+      return Inflect.classify(part);
+    }
+  }).join(".");
+}
+
+function extractModule(moduleName, context) {
+  if (moduleName.match(/\./)) {
+    return module = moduleName.split(".").reduce(function(memo, property) {
+      return memo[property];
+    }, context.Elm);
+  } else {
+    return module = context.Elm[moduleName]
+  }
 }
