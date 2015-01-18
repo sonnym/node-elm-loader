@@ -1,6 +1,6 @@
 { "name": "elm-loader"
 , "description": "An easy way to load Elm files in Node."
-, "version": "0.14.3"
+, "version": "0.14.4"
 , "author": "Sonny Michaud <michaud.sonny@gmail.com> (https://github.com/sonnym)"
 
 , "main" : "src/index.js"
@@ -12,7 +12,9 @@
 , "dependencies": {
     "exec-sync": "*",
     "inflect-js": "*",
-    "jsdom": "*"
+    "jsdom": "*",
+
+    "ref": "0.3.3"
   }
 
 , "devDependencies": {
