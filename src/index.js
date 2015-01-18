@@ -23,9 +23,15 @@ function ElmRunner(filename, baseDir, defaults) {
 
   var self = this;
   withCheckedPath(this.outputPath, function() {
-    compile.call(self);
-    execute.call(self);
-    wrap.call(self);
+    try {
+      compile.call(self);
+      execute.call(self);
+      wrap.call(self);
+    } catch (e) {
+      return e;
+    }
+
+    return true;
   });
 }
 
@@ -40,8 +46,14 @@ function withCheckedPath(outputPath, callback) {
   if (fs.existsSync(outputPath)) {
     throw "Elm: File with name (" + outputPath + ") would be overwritten";
   } else {
-    callback();
+    var result = callback();
+
     fs.unlinkSync(outputPath);
+
+    if (result !== true) {
+      process.stderr.write("Elm: An error ocurred during processing\n");
+      process.stderr.write(result.toString() + "\n");
+    }
   }
 }
 

@@ -30,6 +30,12 @@ exports.basicFunctionality = {
   testExposureOfPortsObjectOnWrapper: function(test) {
     test.equal(this.module.compiledModule.ports, this.module.ports);
     test.done();
+  },
+
+  testRemovesBuildArtifactsOnFailure: function(test) {
+    var module = Elm(path.resolve(__dirname, "fixtures/failing.elm"), fixturePath);
+    test.ok(!fs.existsSync(path.resolve(fixturePath, "failing.js")));
+    test.done();
   }
 };
 
