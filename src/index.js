@@ -61,7 +61,7 @@ function withCheckedPath(outputPath, callback) {
  * run elm module through `elm-make` to generate compiled js
  */
 function compile() {
-  execSync("elm-make " + this.filename + " --output " + this.outputPath);
+  execSync("elm-make --yes " + this.filename + " --output " + this.outputPath);
 }
 
 /**
