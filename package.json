@@ -1,6 +1,6 @@
 { "name": "elm-loader"
 , "description": "An easy way to load Elm files in Node."
-, "version": "0.14.4"
+, "version": "0.14.5"
 , "author": "Sonny Michaud <michaud.sonny@gmail.com> (https://github.com/sonnym)"
 
 , "main" : "src/index.js"
