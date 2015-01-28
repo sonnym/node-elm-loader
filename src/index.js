@@ -48,7 +48,10 @@ function withCheckedPath(outputPath, callback) {
   } else {
     var result = callback();
 
-    fs.unlinkSync(outputPath);
+    try {
+      fs.unlinkSync(outputPath);
+    } catch(e) { };
+
 
     if (result !== true) {
       process.stderr.write("Elm: An error ocurred during processing\n");
