@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 var vm = require("vm");
 
-var execSync = require("exec-sync");
+var execSync = require("child_process").execSync;
 var EventEmitter = require("events").EventEmitter;
 
 var jsdom = require("jsdom").jsdom;

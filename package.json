@@ -10,11 +10,8 @@
   }
 
 , "dependencies": {
-    "exec-sync": "*",
     "inflect-js": "*",
-    "jsdom": "*",
-
-    "ref": "0.3.3"
+    "jsdom": "*"
   }
 
 , "devDependencies": {
@@ -26,6 +23,6 @@
   , "url": "https://github.com/sonnym/node-elm.git"
   }
 
-, "engines": { "node": ">=0.10" }
+, "engines": { "node": ">=0.12" }
 }
 
