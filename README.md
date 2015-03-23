@@ -10,7 +10,7 @@ Installation
 ------------
 
 You will need to already have the Elm platform installed on your system. Please find the relevant
-instructions [here](http://elm-lang.org/Install.elm) and a NodeJS development environment for v0.10.x.
+instructions [here](http://elm-lang.org/Install.elm) and a NodeJS development environment for v0.12.x.
 
 Then, simply add `elm-loader` as a dependency in your `package.json` or run `npm -g elm-loader`.
 
