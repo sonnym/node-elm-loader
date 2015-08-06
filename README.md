@@ -72,7 +72,7 @@ Caveats
 -------
 
 The loader supports conventional CamelCase filenames for the Elm modules they contain.
-If you prefer to split thw words in your filenames with underscores, they will automatically
+If you prefer to split the words in your filenames with underscores, they will automatically
 be inflected to infer the module they contain, e.g. `ticking_port.elm` will correspond to the
 `TickingPort` module above.
 
