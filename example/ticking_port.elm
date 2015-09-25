@@ -1,14 +1,9 @@
 module TickingPort where
 
-import Signal
-import Signal ((<~), Signal)
-
 import Time
+import Html exposing (text)
 
-import Text
-import Graphics.Element (Element)
-main : Element
-main = Text.asText "main"
+main = text "placeholder"
 
 port messageOut : Signal String
 port messageOut = Signal.map toString (Time.every Time.second)
