@@ -13,7 +13,7 @@ You will need to already have the Elm platform installed on your system. Please 
 instructions [here](http://elm-lang.org/Install.elm) and a NodeJS development environment for v0.12.x.
 It is now also possible to install Elm with `npm install -g elm` if you prefer.
 
-Then, simply add `elm-loader` as a dependency in your `package.json` or run `npm -g elm-loader`.
+Then, simply add `elm-loader` as a dependency in your `package.json` or run `npm install -g elm-loader`.
 
 Usage
 -----
@@ -25,15 +25,10 @@ dummy `main` function. Once this is resolved, it will be possible to proceed wit
 ``` Elm
 module TickingPort where
 
-import Signal
-import Signal ((<~), Signal)
-
 import Time
+import Html exposing (text)
 
-import Text
-import Graphics.Element (Element)
-main : Element
-main = Text.asText "main"
+main = text "placeholder"
 
 port messageOut : Signal String
 port messageOut = Signal.map toString (Time.every Time.second)
